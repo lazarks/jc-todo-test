@@ -1,0 +1,47 @@
+.wrapper {
+  position: relative;
+  background: #333;
+  color: #f3f3f3;
+  height: 100%;
+
+  header,
+  footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  header {
+    height: 80px;
+    top: 0;
+    font-size: 38px;
+  }
+  footer {
+    height: 50px;
+
+    bottom: 0;
+    padding-bottom: 0.5rem;
+    span {
+      margin-left: 20px;
+    }
+  }
+
+  .content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 80px;
+    bottom: 50px;
+    background: transparent;
+    height: calc(100vh - 130px);
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  header {
+    align-items: center !important;
+  }
+}

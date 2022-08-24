@@ -1,0 +1,102 @@
+{
+  "lists": [
+    {
+      "id": 0,
+      "title": "list 1",
+      "selected": true,
+      "tasks": [
+        {
+          "id": 1,
+          "title": "task jedan",
+          "completed": true
+        },
+        {
+          "id": 1,
+          "title": "task dva",
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "task tri",
+          "completed": true
+        },
+        {
+          "id": 3,
+          "title": "task cetiri",
+          "completed": false
+        },
+        {
+          "id": 4,
+          "title": "task pet",
+          "completed": true
+        },
+        {
+          "id": 5,
+          "title": "task sest",
+          "completed": false
+        },
+        {
+          "id": 6,
+          "title": "task sedam",
+          "completed": true
+        },
+        {
+          "id": 7,
+          "title": "task osam",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "list 2",
+      "selected": true,
+      "tasks": [
+        {
+          "title": "www",
+          "completed": false,
+          "id": 0
+        },
+        {
+          "title": "wwwwwww",
+          "completed": true,
+          "id": 1
+        },
+        {
+          "id": 5,
+          "title": "wwwww wwww www",
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "new list",
+      "selected": true,
+      "tasks": [
+        {
+          "id": 1,
+          "title": "temp temp",
+          "completed": true
+        },
+        {
+          "id": 2,
+          "title": "ttttttttmmoo",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "another list",
+      "selected": true,
+      "tasks": [
+        {
+          "id": 0,
+          "title": "taskkkkkkkkk",
+          "completed": true
+        }
+      ]
+    }
+  ]
+}

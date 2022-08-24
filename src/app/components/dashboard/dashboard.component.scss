@@ -1,0 +1,99 @@
+@import "../../utils/variables.scss";
+.container {
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .forma {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+
+    input {
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    input[type="text"] {
+      border-top-left-radius: $radius;
+      border-bottom-left-radius: $radius;
+    }
+    input[type="submit"] {
+      border-top-right-radius: $radius;
+      border-bottom-right-radius: $radius;
+      cursor: pointer;
+      background: $blue;
+      color: $white;
+      transition: $transition;
+
+      &:hover {
+        background: $blueSmoked;
+      }
+    }
+  }
+
+  .lists {
+    // background: $blue;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+
+    .list {
+      position: relative;
+      // background: $black;
+      padding: 15px 20px;
+      transition: 0.4s;
+      cursor: pointer;
+
+      .delBtn {
+        position: absolute;
+        border: none;
+        background: transparent;
+        color: $white;
+        top: 0;
+        right: 0;
+        transition: $transition;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.5);
+        }
+      }
+
+      &.selected {
+        // background: $gray1;
+        color: $gray2;
+      }
+
+      &.add {
+        background: $black;
+        color: $white;
+      }
+
+      &:hover:not(.add) {
+        // background: $gray2;
+        color: $gray2;
+      }
+    }
+  }
+
+  .todos {
+    height: 90%;
+    padding-bottom: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+}

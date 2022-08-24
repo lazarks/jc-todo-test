@@ -1,0 +1,73 @@
+<div class="task" [ngClass]="taskData.completed ? 'done' : ''">
+  <div class="flex-wrapper">
+    <label class="checkbox-container">
+      <input
+        type="checkbox"
+        class="check"
+        name="completed"
+        id="completed"
+        [checked]="taskData.completed"
+        (checked)="(taskData.completed)"
+        (change)="toggleCompleted()"
+      />
+      <span class="checkmark"></span>
+    </label>
+
+    <div class="editableText">
+      <div
+        class="title"
+        id="title"
+        *ngIf="!editMode"
+        (click)="editButtonFunc()"
+      >
+        {{ taskData.title }}
+      </div>
+      <span *ngIf="editMode">
+        <form [formGroup]="editForm" (ngSubmit)="editTask(editForm.valid)">
+          <div class="form-control">
+            <input
+              type="text"
+              #newTitle
+              id="newTitle"
+              name="newTitle"
+              formControlName="newTitle"
+              value="{{ taskData.title }}"
+              (blur)="handleBlur()"
+            />
+            <label for="editSubmit" class="lblSubmit"
+              ><i class="fa fa-floppy-disk"></i
+            ></label>
+            <input type="submit" id="editSubmit" style="padding-left: 10px" />
+          </div>
+
+          <span
+            class="errorMessages"
+            *ngIf="
+              editForm.controls['newTitle'].invalid &&
+              (editForm.controls['newTitle'].dirty ||
+                editForm.controls['newTitle'].touched)
+            "
+          >
+            <span *ngIf="editForm.controls['newTitle'].errors?.['required']">
+              Title is required..
+            </span>
+            <span *ngIf="editForm.controls['newTitle'].errors?.['pattern']">
+              Only text allowed..
+            </span>
+            <div *ngIf="editForm.controls['newTitle'].errors?.['titleExists']">
+              Task already exists..
+            </div>
+          </span>
+        </form>
+      </span>
+    </div>
+  </div>
+  <div class="flex-wrapper buttons">
+    <button id="btnEdit" (click)="editButtonFunc()">
+      <i class="fa-solid fa-pen"></i>
+    </button>
+    <button id="btnDelete" (click)="deleteTask()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+</div>

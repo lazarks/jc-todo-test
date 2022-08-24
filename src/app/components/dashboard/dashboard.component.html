@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="forma">
+    <form [formGroup]="taskForm" (ngSubmit)="addTask(taskForm.valid)">
+      <input
+        type="text"
+        name="taskTitle"
+        id="taskTitle"
+        formControlName="taskTitle"
+        placeholder="enter task title.."
+        (focus)="showErrorMessages = true"
+        (blur)="showErrorMessages = false"
+      />
+      <input type="submit" value="Add Task" />
+      <div
+        *ngIf="
+          showErrorMessages &&
+          taskForm.controls['taskTitle'].invalid &&
+          (taskForm.controls['taskTitle'].dirty ||
+            taskForm.controls['taskTitle'].touched)
+        "
+      >
+        <div *ngIf="taskForm.controls['taskTitle'].errors?.['required']">
+          Title is required..
+        </div>
+        <div *ngIf="taskForm.controls['taskTitle'].errors?.['pattern']">
+          Only text allowed..
+        </div>
+        <div *ngIf="taskForm.controls['taskTitle'].errors?.['titleExists']">
+          Task already exists..
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="lists">
+    <div
+      class="list"
+      *ngFor="let list of lists; let i = index"
+      [ngClass]="list.selected ? 'selected' : ''"
+      (click)="selectList(i)"
+    >
+      {{ list.title }}
+      <button type="button" class="delBtn" (click)="deleteList(i)">x</button>
+    </div>
+    <div class="list add" (click)="createNewList()">+</div>
+  </div>
+
+  <div class="todos">
+    <div *ngFor="let task of tasks">
+      <app-task
+        [taskData]="task"
+        (deleteTaskEvent)="deleteTask($event)"
+        (updateTaskEvent)="updateTask($event)"
+      ></app-task>
+    </div>
+  </div>
+</div>
