@@ -1,6 +1,8 @@
 <div class="container">
-  <div class="forma">
+  <!-- INPUT FORM -->
+  <div class="form">
     <form [formGroup]="taskForm" (ngSubmit)="addTask(taskForm.valid)">
+      <!-- INPUT TASK -->
       <input
         type="text"
         name="taskTitle"
@@ -11,6 +13,8 @@
         (blur)="showErrorMessages = false"
       />
       <input type="submit" value="Add Task" />
+
+      <!-- ERROR MESSAGES -->
       <div
         *ngIf="
           showErrorMessages &&
@@ -32,6 +36,7 @@
     </form>
   </div>
 
+  <!-- LISTS || navTABS -->
   <div class="lists">
     <div
       class="list"
@@ -45,6 +50,7 @@
     <div class="list add" (click)="createNewList()">+</div>
   </div>
 
+  <!-- TASKS -->
   <div class="todos">
     <div *ngFor="let task of tasks">
       <app-task

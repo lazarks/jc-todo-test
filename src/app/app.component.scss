@@ -1,7 +1,8 @@
+@import "utils/variables.scss";
 .wrapper {
   position: relative;
-  background: #333;
-  color: #f3f3f3;
+  background: $black;
+  color: $white;
   height: 100%;
 
   header,
@@ -9,20 +10,23 @@
     position: fixed;
     left: 0;
     right: 0;
+
     display: flex;
     align-items: flex-end;
     justify-content: center;
   }
+
   header {
     height: 80px;
     top: 0;
     font-size: 38px;
   }
+
   footer {
     height: 50px;
-
     bottom: 0;
     padding-bottom: 0.5rem;
+
     span {
       margin-left: 20px;
     }

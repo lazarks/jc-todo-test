@@ -1,5 +1,6 @@
 <div class="task" [ngClass]="taskData.completed ? 'done' : ''">
   <div class="flex-wrapper">
+    <!-- checkbox - task.completed -->
     <label class="checkbox-container">
       <input
         type="checkbox"
@@ -13,7 +14,9 @@
       <span class="checkmark"></span>
     </label>
 
+    <!-- task content, edit on click -->
     <div class="editableText">
+      <!-- edit mode off  - show task title-->
       <div
         class="title"
         id="title"
@@ -22,6 +25,8 @@
       >
         {{ taskData.title }}
       </div>
+
+      <!-- edit mode on - show input field to edit task-->
       <span *ngIf="editMode">
         <form [formGroup]="editForm" (ngSubmit)="editTask(editForm.valid)">
           <div class="form-control">
@@ -40,6 +45,7 @@
             <input type="submit" id="editSubmit" style="padding-left: 10px" />
           </div>
 
+          <!-- error messages -->
           <span
             class="errorMessages"
             *ngIf="
@@ -62,6 +68,9 @@
       </span>
     </div>
   </div>
+
+  <!-- right buttons -->
+  <!-- edit | delete task -->
   <div class="flex-wrapper buttons">
     <button id="btnEdit" (click)="editButtonFunc()">
       <i class="fa-solid fa-pen"></i>

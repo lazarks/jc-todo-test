@@ -7,12 +7,15 @@ import { List } from '../models/List';
   providedIn: 'root',
 })
 export class ApiService {
-  numOfTasksBSubject = new BehaviorSubject<number>(0);
-  numOfCompletedTasksBSubject = new BehaviorSubject<number>(0);
-  selectedListId = new BehaviorSubject<number>(0);
+  numOfTasksBSubject = new BehaviorSubject<number>(0); // footer
+  numOfCompletedTasksBSubject = new BehaviorSubject<number>(0); // footer
+
+  selectedListId = new BehaviorSubject<number>(0); // helps validator to find tasks from the selected list
 
   constructor(private http: HttpClient) {}
+
   // lists
+  // POST list
   postList(data: any) {
     return this.http.post<any>('http://localhost:3000/lists', data).pipe(
       map((res: any) => {
@@ -20,6 +23,8 @@ export class ApiService {
       })
     );
   }
+
+  // GET list
   getList() {
     return this.http.get<any>('http://localhost:3000/lists').pipe(
       map((res: any) => {
@@ -27,6 +32,8 @@ export class ApiService {
       })
     );
   }
+
+  // DELETE list
   deleteList(id: number) {
     return this.http.delete<any>('http://localhost:3000/lists/' + id).pipe(
       map((res: any) => {
@@ -34,6 +41,8 @@ export class ApiService {
       })
     );
   }
+
+  // PUT list
   updateList(list: List) {
     return this.http
       .put<any>('http://localhost:3000/lists/' + list.id, list)
@@ -44,19 +53,18 @@ export class ApiService {
       );
   }
 
-  // tasks
+  // GET lists -- returns list's tasks
   getTasksFromList() {
     return this.http
       .get<any>(`http://localhost:3000/lists/${this.selectedListId.value}`)
       .pipe(
         map((res: any) => {
-          // console.log(res.tasks);
           return res.tasks;
         })
       );
   }
 
-  // util
+  // util -- update footer
   updateNumbers(total: number, completed: number) {
     this.numOfTasksBSubject.next(total);
     this.numOfCompletedTasksBSubject.next(completed);

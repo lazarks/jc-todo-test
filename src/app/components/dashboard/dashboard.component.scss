@@ -1,13 +1,14 @@
 @import "../../utils/variables.scss";
 .container {
+  position: relative;
   height: 100%;
   width: 50%;
   margin: 0 auto;
-  position: relative;
+
   display: flex;
   flex-direction: column;
 
-  .forma {
+  .form {
     display: flex;
     justify-content: center;
     padding: 1.5rem;
@@ -16,45 +17,45 @@
       padding: 10px;
       border: none;
       outline: none;
-    }
-    input[type="text"] {
-      border-top-left-radius: $radius;
-      border-bottom-left-radius: $radius;
-    }
-    input[type="submit"] {
-      border-top-right-radius: $radius;
-      border-bottom-right-radius: $radius;
-      cursor: pointer;
-      background: $blue;
-      color: $white;
-      transition: $transition;
 
-      &:hover {
-        background: $blueSmoked;
+      &[type="text"] {
+        border-top-left-radius: $radius;
+        border-bottom-left-radius: $radius;
+      }
+
+      &[type="submit"] {
+        border-top-right-radius: $radius;
+        border-bottom-right-radius: $radius;
+        cursor: pointer;
+        background: $blue;
+        color: $white;
+        transition: $transition;
+
+        &:hover {
+          background: $blueSmoked;
+        }
       }
     }
   }
 
   .lists {
-    // background: $blue;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
 
     .list {
       position: relative;
-      // background: $black;
       padding: 15px 20px;
-      transition: 0.4s;
+      transition: $transition;
       cursor: pointer;
 
       .delBtn {
         position: absolute;
-        border: none;
-        background: transparent;
-        color: $white;
         top: 0;
         right: 0;
+        background: transparent;
+        color: $white;
+        border: none;
         transition: $transition;
         cursor: pointer;
 
@@ -64,7 +65,6 @@
       }
 
       &.selected {
-        // background: $gray1;
         color: $gray2;
       }
 
@@ -74,7 +74,6 @@
       }
 
       &:hover:not(.add) {
-        // background: $gray2;
         color: $gray2;
       }
     }
@@ -85,6 +84,7 @@
     padding-bottom: 50px;
     overflow-y: auto;
     overflow-x: hidden;
+
     display: flex;
     flex-direction: column;
     gap: 10px;

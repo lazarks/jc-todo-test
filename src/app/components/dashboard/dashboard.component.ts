@@ -12,7 +12,7 @@ import { duplicateValidator } from 'src/app/validators/duplicate.validator';
 })
 export class DashboardComponent implements OnInit {
   taskForm!: FormGroup;
-  showErrorMessages: boolean = false;
+  showErrorMessages: boolean = false; // form validation error messages
 
   lists: List[] = [];
   tasks: Task[] = [];
@@ -24,35 +24,41 @@ export class DashboardComponent implements OnInit {
     this.taskForm = this.fBuilder.group({
       taskTitle: [
         '',
-        [Validators.required, Validators.pattern('^[a-zA-Z ]*$')], // sync -text only
-        [duplicateValidator(this.api)], // async
+        [Validators.required, Validators.pattern('^[a-zA-Z ]*$')], // sync - required && text only
+        [duplicateValidator(this.api)], // async - duplicate
       ],
     });
 
     this.getAllLists();
   }
 
+  // add task to the selected list
+  // update lists with updated selected list
   addTask(valid: boolean) {
     let newTaskTitle = this.taskForm.value.taskTitle;
+
+    // if form is valid
     if (valid) {
       let newTask = new Task();
       newTask.title = newTaskTitle;
       newTask.completed = false;
       newTask.id = this.selectedList.tasks.length;
-
       this.selectedList.tasks.push(newTask);
+
       this.api.updateList(this.selectedList).subscribe(
         (res) => {
           this.taskForm.reset();
           this.getAllLists(this.selectedList.id);
         },
         (err) => {
-          console.log('add task error');
+          // console.log('add task error');
         }
       );
     }
   }
 
+  // remove task from selected list
+  // update lists with updated selected list
   deleteTask(taskId: number) {
     this.selectedList.tasks = this.selectedList.tasks.filter(
       (task) => task.id != taskId
@@ -63,11 +69,13 @@ export class DashboardComponent implements OnInit {
         this.getAllLists(this.selectedList.id);
       },
       (err) => {
-        console.log('delete task error');
+        // console.log('delete task error');
       }
     );
   }
 
+  // replace task with an updated task in selected list
+  // update lists with updated selected list
   updateTask(taskData: Task) {
     this.selectedList.tasks.map((el) => {
       return el.id === taskData.id ? taskData : el;
@@ -82,6 +90,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  // get all lists
   getAllLists(selectId: number = 0) {
     this.api.getList().subscribe((res) => {
       this.lists = res;
@@ -89,6 +98,10 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  // when tab clicked, set selected list
+  // update displayed tasks
+  // update selectedListId behavior subject
+  // update footer attributes (also behavior subjects)
   selectList(index: number) {
     this.lists.map((list) => {
       list.selected = false;
@@ -105,6 +118,10 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  // prompt for new list title
+  // create new default list
+  // api post list to db.json
+  //
   createNewList() {
     let newTitle;
     if ((newTitle = prompt('Enter new list title:'))) {
@@ -115,7 +132,7 @@ export class DashboardComponent implements OnInit {
 
       this.api.postList(newList).subscribe(
         (res) => {
-          this.selectedList = res;
+          this.selectedList = res; // select list when its created
           this.getAllLists(this.selectedList.id);
         },
         (err) => {
@@ -125,6 +142,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  // find list with index in this.lists
+  // api delete list from db.json
   deleteList(index: number) {
     let delList = this.lists[index];
     this.api.deleteList(delList.id).subscribe((res) => {
@@ -132,6 +151,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  // update footer numbers
   updateNumbers(total: number, completed: number): void {
     this.api.numOfTasksBSubject.next(total);
     this.api.numOfCompletedTasksBSubject.next(completed);

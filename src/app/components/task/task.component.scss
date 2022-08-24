@@ -10,13 +10,14 @@
   padding: 5px 10px 5px 20px;
   border-radius: $radius;
   font-size: 1.2rem;
-  overflow: hidden;
   word-wrap: break-word;
+  overflow: hidden;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  // task completed
   &.done {
     background: $gray1;
   }
@@ -39,16 +40,18 @@
     }
   }
 
+  // checkbox
   .checkbox-container {
     position: relative;
     padding-left: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 25px;
     cursor: pointer;
     font-size: 22px;
     user-select: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover input ~ .checkmark {
       background: $gray2;
@@ -176,13 +179,14 @@
     margin-right: 180px !important;
   }
   .buttons {
-    // opacity: 0 !important;
     border-bottom-right-radius: $radius;
     border-top-right-radius: $radius;
     background: $blue !important;
     right: -130px !important;
   }
 
+  // error messages on bottom
+  // idk where to put them
   .errorMessages {
     position: fixed;
     bottom: 4%;
