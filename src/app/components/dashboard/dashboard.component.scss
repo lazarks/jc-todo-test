@@ -95,5 +95,9 @@
   .container {
     flex-direction: column-reverse;
     width: 100%;
+
+    .lists {
+      padding-top: 20px;
+    }
   }
 }

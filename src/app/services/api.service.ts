@@ -16,8 +16,8 @@ export class ApiService {
 
   // lists
   // POST list
-  postList(data: any) {
-    return this.http.post<any>('http://localhost:3000/lists', data).pipe(
+  postList(data: List) {
+    return this.http.post<List>('http://localhost:3000/lists', data).pipe(
       map((res: any) => {
         return res;
       })
@@ -26,8 +26,9 @@ export class ApiService {
 
   // GET list
   getList() {
-    return this.http.get<any>('http://localhost:3000/lists').pipe(
+    return this.http.get<List>('http://localhost:3000/lists').pipe(
       map((res: any) => {
+        console.log(res);
         return res;
       })
     );
@@ -35,7 +36,7 @@ export class ApiService {
 
   // DELETE list
   deleteList(id: number) {
-    return this.http.delete<any>('http://localhost:3000/lists/' + id).pipe(
+    return this.http.delete<List>('http://localhost:3000/lists/' + id).pipe(
       map((res: any) => {
         return res;
       })
@@ -45,7 +46,7 @@ export class ApiService {
   // PUT list
   updateList(list: List) {
     return this.http
-      .put<any>('http://localhost:3000/lists/' + list.id, list)
+      .put<List>('http://localhost:3000/lists/' + list.id, list)
       .pipe(
         map((res: any) => {
           return res;
@@ -56,7 +57,7 @@ export class ApiService {
   // GET lists -- returns list's tasks
   getTasksFromList() {
     return this.http
-      .get<any>(`http://localhost:3000/lists/${this.selectedListId.value}`)
+      .get<List>(`http://localhost:3000/lists/${this.selectedListId.value}`)
       .pipe(
         map((res: any) => {
           return res.tasks;
